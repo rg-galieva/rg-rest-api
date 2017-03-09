@@ -59,8 +59,8 @@ app.get("/api/posts", function(req, res) {
 app.post("/api/posts", function(req, res) {
     var newContact = req.body;
 
-    if (!req.body.name) {
-        handleError(res, "Invalid post input", "Must provide a name.", 400);
+    if (!req.body.title) {
+        handleError(res, "Invalid post input", "Must provide a title.", 400);
     }
 
     db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
