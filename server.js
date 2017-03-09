@@ -47,7 +47,7 @@ function handleError(res, reason, message, code) {
  */
 
 app.get("/api/posts", function(req, res) {
-    db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+    db.collection(POSTS_COLLECTION).find({}).toArray(function(err, docs) {
         if (err) {
             handleError(res, err.message, "Failed to get posts.");
         } else {
@@ -57,13 +57,13 @@ app.get("/api/posts", function(req, res) {
 });
 
 app.post("/api/posts", function(req, res) {
-    var newContact = req.body;
+    var newPost = req.body;
 
     if (!req.body.title) {
         handleError(res, "Invalid post input", "Must provide a title.", 400);
     }
 
-    db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
+    db.collection(POSTS_COLLECTION).insertOne(newPost, function(err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to create new post.");
         } else {
