@@ -1,0 +1,6 @@
+{
+  "port": 4040,
+  "mongoose": {
+    "uri": "mongodb://localhost/rg-api"
+  }
+}
