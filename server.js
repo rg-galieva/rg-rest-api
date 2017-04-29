@@ -78,6 +78,7 @@ app.post("/api/posts", function(req, res) {
 app.get("/api/posts/:id", function(req, res) {
     db.collection(POSTS_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
         if (err) {
+            res.status(500);
             handleError(res, err.message, "Failed to get post");
         } else {
             res.status(200).json(doc);
@@ -92,6 +93,7 @@ app.put("/api/posts/:id", function(req, res) {
     db.collection(POSTS_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
         if (err) {
             handleError(res, err.message, "Failed to update post");
+            res.status(500).send('Failed to update post')
         } else {
             updateDoc._id = req.params.id;
             res.status(200).json(updateDoc);
