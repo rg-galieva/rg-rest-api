@@ -6,6 +6,7 @@ var allowCrossDomain = require('./config/cors')
 var POSTS_COLLECTION = "posts";
 
 var app = express();
+app.use(allowCrossDomain);
 app.use(bodyParser.json());
 
 // Create a database variable outside of the database connection callback to reuse the connection pool in your app.
@@ -109,8 +110,4 @@ app.delete("/api/posts/:id", function(req, res) {
             res.status(200).json(req.params.id);
         }
     });
-});
-
-app.configure(function () {
-    app.use(allowCrossDomain);
 });
