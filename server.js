@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
-
+var allowCrossDomain = require('./config/cors')
 var POSTS_COLLECTION = "posts";
 
 var app = express();
@@ -109,4 +109,8 @@ app.delete("/api/posts/:id", function(req, res) {
             res.status(200).json(req.params.id);
         }
     });
+});
+
+app.configure(function () {
+    app.use(allowCrossDomain);
 });
